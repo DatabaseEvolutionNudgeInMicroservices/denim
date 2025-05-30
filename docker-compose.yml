@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  denim-downloading:
+    container_name: "denim-downloading"
+    build:
+        context: ../downloading # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        dockerfile: Dockerfile 
+    image: maxiandr/denim-downloading:1.1.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    ports:
+      - "8081:3000"
+    networks:
+      - denim-network # Connection to the dedicated network
+
+  denim-reverse-engineering:
+    container_name: "denim-reverse-engineering"
+    build:
+        context: ../reverse-engineering # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        dockerfile: Dockerfile # image: # TODO: image id and tag from DockerHub # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: maxiandr/denim-reverse-engineering:1.1.0 
+    ports:
+      - "8082:3000"
+    networks:
+      - denim-network # Connection to the dedicated network
+
+  denim-visualization:
+    container_name: "denim-visualization"
+    build:
+        context: ../visualization # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        dockerfile: Dockerfile
+    image: maxiandr/denim-visualization:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    ports:
+      - "8083:3000"
+    networks:
+      - denim-network # Connection to the dedicated network
+
+  denim-evolution:
+    container_name: "denim-evolution"
+    build:
+        context: ../evolution # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        dockerfile: Dockerfile 
+    image: maxiandr/denim-evolution:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    ports:
+      - "8084:3000"
+    networks:
+      - denim-network # Connection to the dedicated network
+
+  denim-web:
+    container_name: "denim-web"
+    build:
+        dockerfile: Dockerfile 
+        context: ../web # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    image: maxiandr/denim-web:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    ports:
+      - "8080:8080"
+    environment:
+      VITE_DOWNLOADING_MICROSERVICE: "http://denim-downloading"
+      VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://denim-reverse-engineering"
+      VITE_VISUALIZATION_MICROSERVICE: "http://denim-visualization"
+      VITE_EVOLUTION_MICROSERVICE: "http://denim-evolution"
+    networks:
+      - denim-network # Connection to the dedicated network
+
+networks: # Dedicated network
+  denim-network:
+    name: denim-network
+    driver: bridge
