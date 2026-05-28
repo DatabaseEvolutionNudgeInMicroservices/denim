@@ -6,7 +6,7 @@ services:
     build:
         context: ../downloading # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
         dockerfile: Dockerfile 
-    image: denimraindrop/denim-downloading:1.1.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-downloading:1.1.1 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8081:3000"
     networks:
@@ -17,29 +17,29 @@ services:
     build:
         context: ../reverse-engineering # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
         dockerfile: Dockerfile
-    image: denimraindrop/denim-reverse-engineering:1.1.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-reverse-engineering:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8082:3000"
     networks:
       - denim-network # Connection to the dedicated network
 
-  denim-visualization:
-    container_name: "denim-visualization"
+  denim-visualizing:
+    container_name: "denim-visualizing"
     build:
-        context: ../visualization # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        context: ../visualizing # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
         dockerfile: Dockerfile
-    image: denimraindrop/denim-visualization:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-visualizing:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8083:3000"
     networks:
       - denim-network # Connection to the dedicated network
 
-  denim-evolution:
-    container_name: "denim-evolution"
+  denim-evolving:
+    container_name: "denim-evolving"
     build:
-        context: ../evolution # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+        context: ../evolving # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
         dockerfile: Dockerfile 
-    image: denimraindrop/denim-evolution:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-evolving:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8084:3000"
     networks:
@@ -48,16 +48,16 @@ services:
   denim-web:
     container_name: "denim-web"
     build:
-        dockerfile: Dockerfile 
+        dockerfile: Dockerfile
         context: ../web # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-    image: denimraindrop/denim-web:1.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+        args:
+          VITE_DOWNLOADING_MICROSERVICE: "http://localhost:8081"
+          VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"
+          VITE_VISUALIZING_MICROSERVICE: "http://localhost:8083"
+          VITE_EVOLVING_MICROSERVICE: "http://localhost:8084"
+    image: denimraindrop/denim-web:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8080:8080"
-    environment:
-      VITE_DOWNLOADING_MICROSERVICE: "http://denim-downloading"
-      VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://denim-reverse-engineering"
-      VITE_VISUALIZATION_MICROSERVICE: "http://denim-visualization"
-      VITE_EVOLUTION_MICROSERVICE: "http://denim-evolution"
     networks:
       - denim-network # Connection to the dedicated network
 
