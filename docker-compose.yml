@@ -3,9 +3,9 @@ version: "3.8"
 services:
   denim-downloading:
     container_name: "denim-downloading"
-    build:
-        context: ../downloading # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-        dockerfile: Dockerfile 
+    #build:
+    #    context: ../downloading # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    #    dockerfile: Dockerfile 
     image: denimraindrop/denim-downloading:1.1.1 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8081:3000"
@@ -14,9 +14,9 @@ services:
 
   denim-reverse-engineering:
     container_name: "denim-reverse-engineering"
-    build:
-        context: ../reverse-engineering # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-        dockerfile: Dockerfile
+    #build:
+    #    context: ../reverse-engineering # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    #    dockerfile: Dockerfile
     image: denimraindrop/denim-reverse-engineering:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8082:3000"
@@ -25,9 +25,9 @@ services:
 
   denim-visualizing:
     container_name: "denim-visualizing"
-    build:
-        context: ../visualizing # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-        dockerfile: Dockerfile
+    #build:
+    #    context: ../visualizing # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    #    dockerfile: Dockerfile
     image: denimraindrop/denim-visualizing:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8083:3000"
@@ -36,9 +36,9 @@ services:
 
   denim-evolving:
     container_name: "denim-evolving"
-    build:
-        context: ../evolving # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-        dockerfile: Dockerfile 
+    #build:
+    #    context: ../evolving # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    #    dockerfile: Dockerfile 
     image: denimraindrop/denim-evolving:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8084:3000"
@@ -47,15 +47,20 @@ services:
 
   denim-web:
     container_name: "denim-web"
-    build:
-        dockerfile: Dockerfile
-        context: ../web # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
-        args:
-          VITE_DOWNLOADING_MICROSERVICE: "http://localhost:8081"
-          VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"
-          VITE_VISUALIZING_MICROSERVICE: "http://localhost:8083"
-          VITE_EVOLVING_MICROSERVICE: "http://localhost:8084"
+    #build:
+    #    dockerfile: Dockerfile
+    #    context: ../web # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
+    #    args: # Used for predefined environment variables. WARNING! If you perform this operation manually (out of docker-compose), it must be declared as the command-line argument `--build-arg` in the `docker build` command.
+    #      VITE_DOWNLOADING_MICROSERVICE: "http://localhost:8081"
+    #      VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"
+    #      VITE_VISUALIZING_MICROSERVICE: "http://localhost:8083"
+    #      VITE_EVOLVING_MICROSERVICE: "http://localhost:8084"
     image: denimraindrop/denim-web:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    environment:
+        VITE_DOWNLOADING_MICROSERVICE: "http://localhost:8081"
+        VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"
+        VITE_VISUALIZING_MICROSERVICE: "http://localhost:8083"
+        VITE_EVOLVING_MICROSERVICE: "http://localhost:8084"
     ports:
       - "8080:8080"
     networks:
