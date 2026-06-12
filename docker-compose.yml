@@ -39,7 +39,7 @@ services:
     #build:
     #    context: ../evolving # Used for building locally the image. It requires to have the cloned the corresponding repository and to adapt the path accordingly.
     #    dockerfile: Dockerfile 
-    image: denimraindrop/denim-evolving:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-evolving:2.0.1 # Used for downloading the precreated image from the official repository on Dockerhub.
     ports:
       - "8084:3000"
     networks:
@@ -55,7 +55,7 @@ services:
     #      VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"
     #      VITE_VISUALIZING_MICROSERVICE: "http://localhost:8083"
     #      VITE_EVOLVING_MICROSERVICE: "http://localhost:8084"
-    image: denimraindrop/denim-web:2.0.0 # Used for downloading the precreated image from the official repository on Dockerhub.
+    image: denimraindrop/denim-web:2.0.1 # Used for downloading the precreated image from the official repository on Dockerhub.
     environment:
         VITE_DOWNLOADING_MICROSERVICE: "http://localhost:8081"
         VITE_REVERSE_ENGINEERING_MICROSERVICE: "http://localhost:8082"

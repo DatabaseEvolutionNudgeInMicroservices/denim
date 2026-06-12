@@ -4,7 +4,7 @@
 
 ## 📣 Description
 
-DENIM is a tool aiming to provide software developers support in downloading, reverse engineering, visualizing, and evolving microservices architecture. Further details of each goals are provided in respective repositories referenced hereafter.
+DENIM is a tool aiming to provide software developers support in downloading, reverse engineering, visualizing, and evolving microservices architecture. Further details of each goal are provided in respective repositories referenced hereafter.
 
 This documentation repository aims to explain the overview of the tool in terms of objectives and technical details (e.g. architecture diagram, languages and technologies).
 
@@ -73,11 +73,11 @@ As recommended in microservices architectures, each microservice motivates their
 
 ## 🤝 Contributing
 
-Contributions guidelines are described in each repositories. See respective repositories for further details.
+Contributions guidelines are described in each repository. See respective repositories for further details.
 
 ## 📖 References
 
-[André, M., De Rycke, M., Henrotte, A., Raglianti, M., Rivière, E., Cleve, A., & Lanza, M. (2026). DENIM.](https://doi.org/10.5281/zenodo.16414747)
+[André, M., De Rycke, M., Henrotte, A., Raglianti, M., Rivière, E., Di Penta, M., Cleve, A., & Lanza, M. (2026). DENIM.](https://doi.org/10.5281/zenodo.16414747)
 
 [André, M., Raglianti, M., Cleve, A., & Lanza, M. (2025, September). DENIM: Exploring Data Access in Microservices. In Proceedings of the 41st International Conference on Software Maintenance and Evolution (ICSME 2025): Tool Demo track (pp. 900-904). IEEE.](https://doi.org/10.1109/icsme64153.2025.00103)
 
